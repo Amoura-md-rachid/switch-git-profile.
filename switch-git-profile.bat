@@ -1,34 +1,34 @@
 @echo off
-:: Désactive l'affichage des commandes pour un terminal plus propre.
+setlocal
 
-:: Affiche le profil Git actuel avant de le changer
-echo ===== Profil Git actuel =====
-git config user.name
-git config user.email
+echo ===== Profil Git actuel (GLOBAL) =====
+git config --global user.name
+git config --global user.email
 echo.
 
-:: Demande à l'utilisateur de choisir un profil
 set /p profile="Entrez le profil (perso/pro) : "
 
-:: Si l'utilisateur choisit "perso", configure Git avec le profil personnel
-if "%profile%"=="perso" (
-    git config user.name "Mohand Amoura"
-    git config user.email "votre.email.perso@example.com"
-    echo Profil personnel activé avec succès.
-    echo Nom : %user.name%
-    echo Email : %user.email%
+if /i "%profile%"=="perso" (
+    git config --global user.name "Mohand Amoura"
+    git config --global user.email "mohandamoura@gmail.com"
+    goto success
 )
 
-:: Si l'utilisateur choisit "pro", configure Git avec le profil professionnel
-else if "%profile%"=="pro" (
-    git config user.name "m-amoura"
-    git config user.email "m-amoura@pro.com"
-    echo Profil professionnel activé avec succès.
-    echo Nom : %user.name%
-    echo Email : %user.email%
+if /i "%profile%"=="pro" (
+    git config --global user.name "m-amoura"
+    git config --global user.email "m-amoura@enageo.com"
+    goto success
 )
 
-:: Si l'utilisateur entre autre chose, affiche une erreur
-else (
-    echo Profil non reconnu. Utilisez "perso" ou "pro".
-)
+echo Profil non reconnu. Utilisez perso ou pro.
+goto end
+
+
+:success
+echo.
+echo ===== Nouveau profil actif =====
+git config --global user.name
+git config --global user.email
+
+:end
+pause
