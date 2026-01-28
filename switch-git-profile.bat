@@ -22,7 +22,7 @@ if "%profile%"=="perso" (
 :: Si l'utilisateur choisit "pro", configure Git avec le profil professionnel
 else if "%profile%"=="pro" (
     git config user.name "m-amoura"
-    git config user.email "m-amoura@enageo.com"
+    git config user.email "m-amoura@pro.com"
     echo Profil professionnel activé avec succès.
     echo Nom : %user.name%
     echo Email : %user.email%
