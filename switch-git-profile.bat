@@ -10,7 +10,7 @@ set /p profile="Entrez le profil (perso/pro) : "
 
 if /i "%profile%"=="perso" (
     git config --global user.name "Mohand Amoura"
-    git config --global user.email "mohandamoura@gmail.com"
+    git config --global user.email "amoura.md.rachid@gmail.com"
     goto success
 )
 
