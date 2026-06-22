@@ -1,34 +1,71 @@
 @echo off
-setlocal
+title Git Profile Switcher
 
-echo ===== Profil Git actuel (GLOBAL) =====
-git config --global user.name
-git config --global user.email
+:MENU
+cls
+echo =====================================
+echo        GIT PROFILE SWITCHER
+echo =====================================
 echo.
-
-set /p profile="Entrez le profil (perso/pro) : "
-
-if /i "%profile%"=="perso" (
-    git config --global user.name "Mohand Amoura"
-    git config --global user.email "amoura.md.rachid@gmail.com"
-    goto success
-)
-
-if /i "%profile%"=="pro" (
-    git config --global user.name "m-amoura"
-    git config --global user.email "m-amoura@enageo.com"
-    goto success
-)
-
-echo Profil non reconnu. Utilisez perso ou pro.
-goto end
-
-
-:success
+echo 1 - Profil Personnel
+echo 2 - Profil Professionnel
+echo 3 - Afficher le profil actuel
+echo 0 - Quitter
 echo.
-echo ===== Nouveau profil actif =====
-git config --global user.name
-git config --global user.email
+set /p choice="Choisissez une option : "
 
-:end
+if "%choice%"=="1" goto PERSONAL
+if "%choice%"=="2" goto WORK
+if "%choice%"=="3" goto SHOW
+if "%choice%"=="0" goto END
+
+echo.
+echo Choix invalide !
 pause
+goto MENU
+
+:PERSONAL
+echo.
+echo Activation du profil Personnel...
+
+git config --global user.name "AMOURA Mohand"
+git config --global user.email "amoura.md.rachid@gmail.com"
+
+echo.
+echo Profil Personnel active !
+echo.
+git config --global --list
+pause
+goto MENU
+
+:WORK
+echo.
+echo Activation du profil Professionnel...
+
+git config --global user.name "AMOURA Mohand"
+git config --global user.email "m-amoura@enageo.com"
+
+echo.
+echo Profil Professionnel active !
+echo.
+git config --global --list
+pause
+goto MENU
+
+:SHOW
+echo.
+echo Profil Git actuel :
+echo -------------------------
+echo Nom   :
+git config --global user.name
+
+echo.
+echo Email :
+git config --global user.email
+
+echo.
+pause
+goto MENU
+
+:END
+exit
